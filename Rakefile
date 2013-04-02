@@ -8,8 +8,9 @@ Bundler.require
 
 Motion::Project::App.setup do |app|
   # Use `rake config' to see complete project settings.
-  app.name = 'HackerNews'
-
+  app.name = 'HipsterNews'
+  app.device_family = [:iphone, :ipad]
+  app.prerendered_icon = true
   app.pods do
     pod 'SVPullToRefresh'
   end

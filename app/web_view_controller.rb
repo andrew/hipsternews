@@ -1,14 +1,26 @@
 class WebViewController < UIViewController
-  def initWithURL(url)
-     @url = url
+  def initWithStory(story)
+     @story = story
      init
    end
-  
+
   def viewDidLoad
     self.view = UIWebView.alloc.init
-    url = NSURL.URLWithString(@url)
-    request = NSURLRequest.requestWithURL(url)
     self.view.scalesPageToFit = true
-    self.view.loadRequest request
+    loadURL(@story['url']) if @story
+  end
+
+  def loadStory(story)
+    @story = story
+    loadURL(@story['url'])
+    navigationItem.title = @story['title']
+  end
+
+  def loadURL(url)
+    self.view.loadRequest NSURLRequest.requestWithURL(NSURL.URLWithString(url))
+  end
+
+  def viewWillAppear(animated)
+    navigationItem.title = @story['title'] if @story
   end
 end

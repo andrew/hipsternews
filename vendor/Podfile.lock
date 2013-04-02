@@ -1,0 +1,11 @@
+
+PODS:
+- SVPullToRefresh (0.4.1)
+
+DEPENDENCIES:
+- SVPullToRefresh
+
+SPEC CHECKSUMS:
+  SVPullToRefresh: 61a0e4bd12bd6f8e3465909810b0fbeb1a28d5f2
+
+COCOAPODS: 0.16.4

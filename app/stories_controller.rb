@@ -64,41 +64,7 @@ class StoriesController < UITableViewController
   def tableView(tableView, cellForRowAtIndexPath:indexPath)
     cell = tableView.dequeueReusableCellWithIdentifier(CellID) || StoryCell.alloc.initWithStyle(UITableViewCellStyleSubtitle, reuseIdentifier:CellID)
     story = @data[indexPath.row]
-    
-    if story['type'] == 'link'
-      story['description'] = "#{story['points']} points - #{story['time_ago']} by #{story['user']} - #{story['domain']}"
-    else
-      story['description'] = "#{story['type']} - #{story['time_ago']}"
-      story['url'] = "https://news.ycombinator.com/#{story['url']}"
-    end
-    
-    layout(cell.contentView, :cell) do
-      @info_view = subview(UIView, :info) do
-        title_view = subview(UILabel, :title)
-        title_view.text = story['title']
-        desc_view = subview(UILabel, :description)
-        desc_view.text = story['description']
-      end
-      @comments_view = subview(UIView, :comments) do
-        count_view = subview(UILabel, :count)
-        count_view.text = story['comments_count'].to_s
-      end
-    end
-    
-    @info_view.when_tapped do
-      if Device.ipad?
-        UIApplication.sharedApplication.delegate.web_view_controller.loadStory(story)
-      else
-        view_controller = WebViewController.alloc.initWithStory(story)
-        navigationItem.title = 'Back'
-        self.parentViewController.pushViewController(view_controller, animated: true)
-      end
-    end
-    
-    @comments_view.when_tapped do
-      puts 'comments tapped'
-    end
-    
+    cell.populate(story)
     cell.selectionTintColor = '#ff6600'.to_color
     cell
   end

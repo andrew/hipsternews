@@ -1,4 +1,4 @@
-class WebViewController < UIViewController
+class CommentsController < UIViewController
   def initWithStory(story)
      @story = story
      init
@@ -7,19 +7,7 @@ class WebViewController < UIViewController
   def viewDidLoad
     self.view = UIWebView.alloc.init
     self.view.scalesPageToFit = true
-    loadURL(@story['url']) if @story
-  end
-
-  def loadStory(story)
-    @story = story
-    loadURL(@story['url'])
-    navigationItem.title = @story['title']
-  end
-
-  def loadComments(story)
-    @story = story
     loadURL("https://news.ycombinator.com/item?id=#{@story['id']}")
-    navigationItem.title = @story['title']
   end
 
   def loadURL(url)

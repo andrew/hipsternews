@@ -18,6 +18,7 @@ class StoryCell < UITableViewCell
         @desc_view = subview(UILabel, :description)
       end
       @comments_view = subview(UIView, :comments) do
+        @comment_icon = subview(UIImageView, :icon)
         @count_view = subview(UILabel, :count)
       end
     end
@@ -45,7 +46,12 @@ class StoryCell < UITableViewCell
     end
 
     @comments_view.when_tapped do
-      puts 'comments tapped'
+      if Device.ipad?
+        UIApplication.sharedApplication.delegate.web_view_controller.loadComments(story)
+      else
+        view_controller = CommentsController.alloc.initWithStory(story)
+        UIApplication.sharedApplication.delegate.nav_controller.pushViewController(view_controller, animated: true)
+      end
     end
   end
 end

@@ -30,10 +30,11 @@ class StoryCell < UITableViewCell
       story['description'] = "#{story['type']} - #{story['time_ago']}"
       story['url'] = "https://news.ycombinator.com/#{story['url']}"
     end
+
     @title_view.text = story['title']
     @desc_view.text = story['description']
     @count_view.text = story['comments_count'].to_s
-    
+
     @info_view.when_tapped do
       if Device.ipad?
         UIApplication.sharedApplication.delegate.web_view_controller.loadStory(story)

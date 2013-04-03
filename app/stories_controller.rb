@@ -27,7 +27,7 @@ class StoriesController < UITableViewController
       tableView.pullToRefreshView.stopAnimating
     end
   end
-  
+
   def loadMore
     if @more_loaded
       tableView.infiniteScrollingView.stopAnimating

@@ -2,8 +2,11 @@
 
 WIP Rubymotion Hacker News reader
 
+![screenshot](screenshot.png)
+
 ## TODO
 
-* search
-* comments
+* refresh when awoken from sleep
+* proper comments
 * sharing
+* search

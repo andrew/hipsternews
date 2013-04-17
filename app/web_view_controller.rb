@@ -63,12 +63,12 @@ class WebViewController < UIViewController
 
   def instapaper_view
     url = "http://www.instapaper.com/text?u=#{@story['url']}"
-    self.view.loadRequest NSURLRequest.requestWithURL(NSURL.URLWithString(url))
+    loadWebview(url)
     show_regular_button
   end
   
   def regular_view
-    self.view.loadRequest NSURLRequest.requestWithURL(NSURL.URLWithString(@story['url']))
+    loadWebview
     show_instapaper_button(false)
   end
 

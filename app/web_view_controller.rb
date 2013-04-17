@@ -7,7 +7,22 @@ class WebViewController < UIViewController
   def viewDidLoad
     self.view = UIWebView.alloc.init
     self.view.scalesPageToFit = true
+    self.view.delegate = self
+    
+    @loading_view = UIActivityIndicatorView.new
+    @loading_view.frame = [[0,0],[30,30]]
+    @loading_button = UIBarButtonItem.alloc.initWithCustomView(@loading_view)
+    navigationItem.setRightBarButtonItem(@loading_button, true)
+
+    @flexible = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemFlexibleSpace, target:nil, action:nil)
+    @share_button = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemAction, target: self, action: 'share_button_action')
+
     loadWebview if @story
+  end
+
+  def webViewDidFinishLoad(webview)
+    return if webview.isLoading
+    @loading_view.stopAnimating()
   end
 
   def viewWillAppear(animated)
@@ -19,15 +34,14 @@ class WebViewController < UIViewController
     toolbar_button = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemBookmarks,
       target: self,
       action: :instapaper_view)
-    self.setToolbarItems([toolbar_button], animated:animated)
+    self.setToolbarItems([toolbar_button, @flexible, @share_button], animated:animated)
   end
 
   def show_regular_button
     toolbar_button = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemRefresh,
         target: self,
         action: :regular_view)
-
-    self.setToolbarItems([toolbar_button], animated:false)
+    self.setToolbarItems([toolbar_button, @flexible, @share_button], animated:false)
   end
 
   def loadStory(story)
@@ -41,12 +55,12 @@ class WebViewController < UIViewController
   end
 
   def loadWebview(url = @story['url'])
+    @loading_view.startAnimating()
+    
     self.view.loadRequest NSURLRequest.requestWithURL(NSURL.URLWithString(url))
     navigationItem.title = @story['title']
-    share_button = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemAction, target: self, action: 'share_button_action')
-    navigationItem.setRightBarButtonItem(share_button, true)
   end
-  
+
   def instapaper_view
     url = "http://www.instapaper.com/text?u=#{@story['url']}"
     self.view.loadRequest NSURLRequest.requestWithURL(NSURL.URLWithString(url))

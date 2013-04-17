@@ -6,9 +6,7 @@ WIP Rubymotion Hacker News reader
 
 ## TODO
 
-* refresh when awoken from sleep
 * proper comments
-* sharing
 * search
 
 ## Development

@@ -6,9 +6,13 @@ class AppDelegate
     true
   end
 
+  def stories_controller
+    @stories_controller ||= StoriesController.alloc.init
+  end
+
   def nav_controller
     @nav_controller ||= begin
-      nav = UINavigationController.alloc.initWithRootViewController(StoriesController.alloc.init)
+      nav = UINavigationController.alloc.initWithRootViewController(stories_controller)
       nav.wantsFullScreenLayout = true
       nav.toolbarHidden = true
 
@@ -31,5 +35,10 @@ class AppDelegate
     @web_view ||= begin
       WebViewController.alloc.init
     end
+  end
+  
+  def applicationDidBecomeActive(application)
+    @stories_controller.loadData
+    @stories_controller.tableView.setContentOffset(CGPoint.new)
   end
 end

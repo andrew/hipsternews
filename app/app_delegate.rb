@@ -14,10 +14,11 @@ class AppDelegate
     @nav_controller ||= begin
       nav = UINavigationController.alloc.initWithRootViewController(stories_controller)
       nav.wantsFullScreenLayout = true
-      nav.toolbarHidden = true
-
+      nav.toolbarHidden = false
       navigationBar = UINavigationBar.appearance
       navigationBar.setTintColor '#ff6600'.to_color
+      navToolbar = UIToolbar.appearance
+      navToolbar.setTintColor '#ff6600'.to_color
       nav
     end
   end

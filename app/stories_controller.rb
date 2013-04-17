@@ -9,6 +9,10 @@ class StoriesController < UITableViewController
     tableView.addInfiniteScrollingWithActionHandler(Proc.new { loadMore })
   end
 
+  def viewDidAppear(animated)
+    UIApplication.sharedApplication.delegate.nav_controller.setToolbarHidden(true, animated:false)
+  end
+
   def loadData
     BW::HTTP.get("http://node-hnapi.herokuapp.com/news") do |response|
       if response.ok?

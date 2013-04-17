@@ -10,6 +10,26 @@ class WebViewController < UIViewController
     loadWebview if @story
   end
 
+  def viewWillAppear(animated)
+    navigationController.setToolbarHidden(false, animated:true)
+    show_instapaper_button(animated)
+  end
+
+  def show_instapaper_button(animated)
+    toolbar_button = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemBookmarks,
+      target: self,
+      action: :instapaper_view)
+    self.setToolbarItems([toolbar_button], animated:animated)
+  end
+
+  def show_regular_button
+    toolbar_button = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemRefresh,
+        target: self,
+        action: :regular_view)
+
+    self.setToolbarItems([toolbar_button], animated:false)
+  end
+
   def loadStory(story)
     @story = story
     loadWebview
@@ -25,6 +45,17 @@ class WebViewController < UIViewController
     navigationItem.title = @story['title']
     share_button = UIBarButtonItem.alloc.initWithBarButtonSystemItem(UIBarButtonSystemItemAction, target: self, action: 'share_button_action')
     navigationItem.setRightBarButtonItem(share_button, true)
+  end
+  
+  def instapaper_view
+    url = "http://www.instapaper.com/text?u=#{@story['url']}"
+    self.view.loadRequest NSURLRequest.requestWithURL(NSURL.URLWithString(url))
+    show_regular_button
+  end
+  
+  def regular_view
+    self.view.loadRequest NSURLRequest.requestWithURL(NSURL.URLWithString(@story['url']))
+    show_instapaper_button(false)
   end
 
   def share_button_action

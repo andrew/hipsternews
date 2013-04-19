@@ -40,6 +40,6 @@ class AppDelegate
   
   def applicationDidBecomeActive(application)
     @stories_controller.loadData
-    @stories_controller.tableView.setContentOffset(CGPoint.new)
+    @stories_controller.tableView.setContentOffset(CGPoint.new(0,44))
   end
 end

@@ -4,11 +4,6 @@ Rubymotion Hacker News reader
 
 ![screenshot](screenshot.png)
 
-## TODO
-
-* proper comments
-* search
-
 ## Development
 
 Source hosted at [GitHub](http://github.com/andrew/hipsternews).

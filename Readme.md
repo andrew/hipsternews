@@ -1,6 +1,6 @@
 # HipsterNews
 
-WIP Rubymotion Hacker News reader
+Rubymotion Hacker News reader
 
 ![screenshot](screenshot.png)
 

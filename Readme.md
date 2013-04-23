@@ -6,10 +6,10 @@ Rubymotion Hacker News reader
 
 ## Dependencies
 
-Ruby 1.9.x
-Bundler
-Xcode
-Rubymotion
+* Ruby 1.9.x
+* Bundler
+* Xcode
+* Rubymotion
 
 ## Development
 

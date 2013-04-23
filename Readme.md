@@ -11,6 +11,13 @@ Rubymotion Hacker News reader
 * Xcode
 * Rubymotion
 
+## Setup
+
+    git clone git@github.com:andrew/hipsternews.git
+    cd hipsternews
+    bundle install
+    rake
+
 ## Development
 
 Source hosted at [GitHub](http://github.com/andrew/hipsternews).

@@ -4,6 +4,13 @@ Rubymotion Hacker News reader
 
 ![screenshot](screenshot.png)
 
+## Dependencies
+
+Ruby 1.9.x
+Bundler
+Xcode
+Rubymotion
+
 ## Development
 
 Source hosted at [GitHub](http://github.com/andrew/hipsternews).

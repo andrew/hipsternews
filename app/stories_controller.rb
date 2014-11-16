@@ -5,9 +5,9 @@ class StoriesController < UITableViewController
     super
     @data = []
     loadData
-    tableView.addPullToRefreshWithActionHandler(Proc.new { loadData })
-    tableView.addInfiniteScrollingWithActionHandler(Proc.new { loadMore })
-    
+    # tableView.addPullToRefreshWithActionHandler(Proc.new { loadData })
+    # tableView.addInfiniteScrollingWithActionHandler(Proc.new { loadMore })
+
     search_bar = UISearchBar.alloc.initWithFrame([[0,0],[320,44]])
     search_bar.delegate = self
     search_bar.setTintColor '#ff6600'.to_color
@@ -35,7 +35,7 @@ class StoriesController < UITableViewController
       else
         App.alert(response.error_message)
       end
-      tableView.pullToRefreshView.stopAnimating
+      # tableView.pullToRefreshView.stopAnimating
       tableView.setContentOffset(CGPoint.new(0,44))
     end
   end
@@ -63,11 +63,11 @@ class StoriesController < UITableViewController
       tableView.infiniteScrollingView.stopAnimating
     end
   end
-  
+
   def searchBarShouldBeginEditing(search_bar)
     search_bar.setShowsCancelButton true, animated:true
   end
-  
+
   def searchBarSearchButtonClicked(search_bar)
     search_bar.resignFirstResponder
     navigationItem.title = "Search for '#{search_bar.text}'"
@@ -76,7 +76,7 @@ class StoriesController < UITableViewController
     view.reloadData
     search_bar.subviews[2].setEnabled(true)
   end
-  
+
   def searchBarCancelButtonClicked(search_bar)
     navigationItem.title = "HipsterNews"
     search_bar.resignFirstResponder

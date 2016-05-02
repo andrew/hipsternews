@@ -35,4 +35,4 @@ Tests can be ran with `rake spec`
 
 ## Copyright
 
-Copyright (c) 2015 Andrew Nesbitt. See [LICENSE](LICENSE) for details.
+Copyright (c) 2016 Andrew Nesbitt. See [LICENSE](LICENSE) for details.
